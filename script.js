@@ -18,3 +18,7 @@ function getComputerChoice() {
 // If computerChoice is greater than 2/3, (meaning, it does not fall in the categories of the first two) "Scissors" gets returned.
 
 //Function for Human Choice
+function getHumanChoice() {
+  return prompt("Throw a hand: rock, paper, or scissors");
+}
+console.log("paper"); // Test
