@@ -22,3 +22,7 @@ function getHumanChoice() {
   return prompt("Throw a hand: rock, paper, or scissors");
 }
 console.log("paper"); // Test
+
+//Declare the players score variables globally
+let humanScore = 0;
+let computerScore = 0;
