@@ -1,28 +1,72 @@
-//Function for computer choice
 function getComputerChoice() {
-  const computerChoice = Math.random(); //generates random number between 0 - 1
+  let choiceComputer = Math.floor(Math.random() * 3);
 
-  if (computerChoice < 1 / 3) {
-    return "Rock";
-  } else if (computerChoice < 2 / 3) {
-    return "Paper";
-  } else {
-    return "Scissors";
+  if (choiceComputer === 0) {
+    return "rock";
+  } else if (choiceComputer === 1) {
+    return "paper";
+  } else if (choiceComputer === 2) {
+    return "scissors";
   }
 }
-// Explanation:
-// Math.random() returns a floating-point, random number between 0 - 1.
-// The range of Math.random() is then divided into 3 equal parts (for rock, paper, scissors)
-// If computerChoice is less than 1/3, "Rock" is returned.
-// If computerChoice is less than 2/3, but not less than 1/3, "Paper" is returned.
-// If computerChoice is greater than 2/3, (meaning, it does not fall in the categories of the first two) "Scissors" gets returned.
 
-//Function for Human Choice
 function getHumanChoice() {
-  return prompt("Throw a hand: rock, paper, or scissors");
-}
-console.log("paper"); // Test
+  let choiceHuman = prompt("Choose rock, paper, or scissors");
+  choiceHuman = choiceHuman.toLowerCase();
 
-//Declare the players score variables globally
+  if (choiceHuman == "rock") {
+    return "rock";
+  } else if (choiceHuman == "paper") {
+    return "paper";
+  } else if (choiceHuman == "scissors") {
+    return "scissors";
+  }
+}
+
 let humanScore = 0;
 let computerScore = 0;
+
+function playGame() {
+  function playRound(humanChoice, computerChoice) {
+    if (humanChoice === "rock" && computerChoice === "rock") {
+      console.log("Draw! Round will be replayed");
+    } else if (humanChoice === "rock" && computerChoice === "paper") {
+      console.log("Computer Wins!");
+      computerScore++;
+    } else if (humanChoice === "rock" && computerChoice === "scissors") {
+      console.log("You Win!");
+      humanScore++;
+    } else if (humanChoice === "paper" && computerChoice === "rock") {
+      console.log("You Win!");
+      humanScore++;
+    } else if (humanChoice === "paper" && computerChoice === "paper") {
+      console.log("Draw! Round will be replayed");
+      playRound(getHumanChoice(), getComputerChoice());
+    } else if (humanChoice === "paper" && computerChoice === "scissors") {
+      console.log("Computer Wins!");
+      computerScore++;
+    } else if (humanChoice === "scissors" && computerChoice === "rock") {
+      console.log("Computer Wins!");
+      computerScore++;
+    } else if (humanChoice === "scissors" && computerChoice === "paper") {
+      console.log("You Win!");
+      computerScore++;
+    } else if (humanChoice === "scissors" && computerChoice === "scissors") {
+      console.log("Draw! Round will be replayed");
+      playRound(getHumanChoice(), getComputerChoice());
+    }
+  }
+  playRound(getHumanChoice(), getComputerChoice());
+  playRound(getHumanChoice(), getComputerChoice());
+  playRound(getHumanChoice(), getComputerChoice());
+  playRound(getHumanChoice(), getComputerChoice());
+  playRound(getHumanChoice(), getComputerChoice());
+
+  if (humanScore > computerScore) {
+    console.log("You Win the game! Congradulations!");
+  } else if (humanScore < computerScore) {
+    console.log("You Lost! Computer Wins!");
+  }
+}
+
+playGame();
