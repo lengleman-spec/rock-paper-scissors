@@ -1,6 +1,14 @@
 // Scores
+const resultsDiv = document.getElementById("results");
+const scoreDiv = document.getElementById("score");
+const winnerDiv = document.getElementById("winner");
+
 let humanScore = 0;
 let computerScore = 0;
+
+function updateScore() {
+  scoreDiv.textContent = `Score - You: ${humanScore} | computer: ${computerScore}`;
+}
 
 // Computer randomly picks rock, paper, or scissors
 function getComputerChoice() {
@@ -9,22 +17,17 @@ function getComputerChoice() {
   return choices[index];
 }
 
-// Prompt human for choice safely
-// function getHumanChoice() {
-//   let choiceHuman;
-//   do {
-//     choiceHuman = prompt("Choose rock, paper, or scissors");
-//     if (choiceHuman === null) return null; // user cancelled
-//     choiceHuman = choiceHuman.toLowerCase();
-//   } while (!["rock", "paper", "scissors"].includes(choiceHuman));
-//   return choiceHuman;
-// }
-
 // Play a single round; returns true if round completed, false if draw
 function playRound(humanChoice, computerChoice) {
   if (humanChoice === computerChoice) {
     resultsDiv.textContent = `Draw! Both chose ${humanChoice}`;
     return;
+  }
+
+  if (humanScore === 5) {
+    winnerDiv.textContent = "You win the game!";
+  } else if (computerScore === 5) {
+    winnerDiv.textContent = "Computer wins the game!";
   }
 
   if (
@@ -52,7 +55,6 @@ document.getElementById("scissors").addEventListener("click", () => {
   playRound("scissors", getComputerChoice());
 });
 
-const resultsDiv = document.getElementById("results");
 resultsDiv.textContent = "You Win!";
 
 // Display final results
