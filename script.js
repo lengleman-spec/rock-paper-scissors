@@ -23,8 +23,8 @@ function getComputerChoice() {
 // Play a single round; returns true if round completed, false if draw
 function playRound(humanChoice, computerChoice) {
   if (humanChoice === computerChoice) {
-    console.log(`Draw! Both chose ${humanChoice}. Round will be replayed.`);
-    return false; // round not completed
+    resultsDiv.textContent = `Draw! Both chose ${humanChoice}`;
+    return;
   }
 
   if (
@@ -32,30 +32,15 @@ function playRound(humanChoice, computerChoice) {
     (humanChoice === "paper" && computerChoice === "rock") ||
     (humanChoice === "scissors" && computerChoice === "paper")
   ) {
-    console.log(`You Win! ${humanChoice} beats ${computerChoice}`);
     humanScore++;
+    resultsDiv.textContent = `You win! ${humanChoice} defeats ${computerChoice}`;
   } else {
-    console.log(`Computer Wins! ${computerChoice} beats ${humanChoice}`);
     computerScore++;
+    resultsDiv.textContent = `You lose! ${computerChoice} defeats ${humanChoice}`;
   }
 
   return true; // round completed
 }
-
-// Play a 5-round game
-// function playGame() {
-//   for (let i = 0; i < 5; i++) {
-//     let roundCompleted = false;
-//     while (!roundCompleted) {
-//       let humanChoice = getHumanChoice();
-//       if (humanChoice === null) {
-//         console.log("Game cancelled.");
-//         return; // stop if user cancels
-//       }
-//       let computerChoice = getComputerChoice();
-//       roundCompleted = playRound(humanChoice, computerChoice);
-//     }
-//   }
 
 document.getElementById("rock").addEventListener("click", () => {
   playRound("rock", getComputerChoice());
@@ -66,6 +51,9 @@ document.getElementById("paper").addEventListener("click", () => {
 document.getElementById("scissors").addEventListener("click", () => {
   playRound("scissors", getComputerChoice());
 });
+
+const resultsDiv = document.getElementById("results");
+resultsDiv.textContent = "You Win!";
 
 // Display final results
 console.log(`Final Score: You ${humanScore} - Computer ${computerScore}`);
