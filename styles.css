@@ -10,5 +10,8 @@
 .btn-container {
   display: flex;
   gap: 0.5rem;
-  font-size: 2rem;
+}
+
+.btn-container button {
+  font-size: 1.2rem;
 }
