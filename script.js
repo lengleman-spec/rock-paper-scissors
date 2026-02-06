@@ -37,9 +37,11 @@ function playRound(humanChoice, computerChoice) {
   ) {
     humanScore++;
     resultsDiv.textContent = `You win! ${humanChoice} defeats ${computerChoice}`;
+    updateScore();
   } else {
     computerScore++;
     resultsDiv.textContent = `You lose! ${computerChoice} defeats ${humanChoice}`;
+    updateScore();
   }
 
   return true; // round completed
